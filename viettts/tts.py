@@ -16,7 +16,13 @@ class TTS:
         load_jit=False,
         load_onnx=False
     ):
-        if not os.path.exists(model_dir):
+        required_files = [
+            "config.yaml", "speech_embedding.onnx", "speech_tokenizer.onnx", 
+            "llm.pt", "flow.pt", "hift.pt"
+        ]
+        files_exist = os.path.exists(model_dir) and all(os.path.exists(os.path.join(model_dir, f)) for f in required_files)
+
+        if not files_exist:
             logger.info(f'Downloading model from huggingface [dangvansam/viet-tts]')
             download_model(model_dir)
 

@@ -26,6 +26,7 @@ from viettts.utils.file_utils import load_prompt_speech_from_file, load_voices
 
 VOICE_DIR = 'samples'
 VOICE_MAP = load_voices(VOICE_DIR)
+MODEL_DIR = 'pretrained-models'
 
 global tts_obj
 tts_obj = None
@@ -280,8 +281,8 @@ async def tts(
 
     prompt_speech_16k = load_prompt_speech_from_file(
         filepath=voice_file,
-        min_duration=3,
-        max_duration=5
+        min_duration=2,
+        max_duration=4
     )
 
     temp_output_file = tempfile.NamedTemporaryFile(
@@ -333,4 +334,4 @@ async def tts(
 async def startup():
     global tts_obj
     RunVar("_default_thread_limiter").set(CapacityLimiter(os.cpu_count()))
-    tts_obj = TTS('./pretrained-models')
+    tts_obj = TTS(model_dir=MODEL_DIR)
