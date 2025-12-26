@@ -94,7 +94,7 @@ def show_voice():
     table.add_column("File", justify="left")
     
     for i, (voice_name, voice_path) in enumerate(voice_map.items()):
-        table.add_row(str(i+1), voice_name, voice_path)
+        table.add_row(str(i), voice_name, voice_path)
 
     console.print(table)
 
